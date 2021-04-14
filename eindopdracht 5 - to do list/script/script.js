@@ -15,14 +15,17 @@ const setTaskList = async function () {
     const data = await getData();
     data.forEach(task => {
         const li = document.createElement("li", class { "li" });
+        li.id = `${task.id}`;
         const liContent = document.createTextNode(`${task.description}`);
-        const icon = document.createElement("i", class { "icon" })
-        li.classList.add(`${task.id}`);
+        const icon = document.createElement("i");
+        icon.id = `${task.id}`;
         li.appendChild(liContent);
         li.appendChild(icon);
         taskList.append(li)
     });
 };
+
+
 
 function addTask() {
     const data = { description: document.getElementById("task").value, done: false };
@@ -42,30 +45,13 @@ setTaskList()
 
 
 
-// const deleteTask = async function () {
-//     document.getElementsByClassName("icon").addEventListener("click", async e => {
-//         if (e.target.classList.value === "trashcan") {
-//             console.log(e.target.parentElement.id);
-//             await deleteData(e.target.parentElement.id);
-//             addApiDataToDom();
-//         }
-//     });
-// };
-
-// deleteTask();
-
-
-
-
-
-
-
 ///detelen
 
 
 function deleteTask() {
     const data = { description: document.getElementById("task").value, done: false };
-    fetch("http://localhost:3000/", {
+    task_id = task.id;
+    fetch("http://localhost:3000/" + task.id, {
         method: "DELETE",
         body: JSON.stringify(data),
         headers: {
@@ -73,25 +59,10 @@ function deleteTask() {
         },
     });
     window.location.reload(false);
-}
+};
 
-document.getElementsByClassName("icon").addEventListener("click", deleteTask)
-
-
-// const deleteTask = () => {
-//     const e = document.getElementsByClassName("icon")
-//     e.parentElement.remove();
-// };
-
-// deleteTask()
-
-// async function deleteTask() {
-//     const taskList = document.getElementById("taskList")
-//     const data = await getData();
-
-//     data.splice(task, 1)
-
-//     var item = `${task.id}`  ;
+document.getElementById("task_id").addEventListener("click", deleteTask);
 
 
-//     document.getElementsByClassName("icon").addEventListener("click", deleteTask)
+
+
