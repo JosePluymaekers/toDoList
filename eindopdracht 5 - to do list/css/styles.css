@@ -1,0 +1,32 @@
+li {
+  list-style: none;
+  border: solid darkgreen 1px;
+  border-radius: 3px;
+  width: 200px;
+  height: 25px;
+  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+i::after {
+  float: right;
+  padding: 5px;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f2ed";
+}
+
+body {
+  position: relative;
+  left: 50px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/*# sourceMappingURL=styles.css.map */
