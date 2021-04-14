@@ -1,24 +1,18 @@
-
-// const setTaskList = async function () {
-//     const taskList = document.getElementById("taskList")
-//     const data = await getData();
-//     data.forEach(task => {
-//         const li = document.createElement("li", class { "icon" });
-//         const liContent = document.createTextNode(`${task.description}`);
-//         li.appendChild(liContent);
-//         taskList.append(li);
-//     });
-// };
+//get task list from local api
 
 const setTaskList = async function () {
     const taskList = document.getElementById("taskList")
     const data = await getData();
     data.forEach(task => {
         const li = document.createElement("li", class { "li" });
-        li.id = `${task.id}`;
         const liContent = document.createTextNode(`${task.description}`);
         const icon = document.createElement("i");
-        icon.id = `${task.id}`;
+        const checkbox = document.createElement("INPUT");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.id = `${task._id}`;
+        icon.id = `${task._id}`;
+        icon.addEventListener("click", deleteTask)
+        li.appendChild(checkbox);
         li.appendChild(liContent);
         li.appendChild(icon);
         taskList.append(li)
@@ -26,6 +20,7 @@ const setTaskList = async function () {
 };
 
 
+//add task to the dom
 
 function addTask() {
     const data = { description: document.getElementById("task").value, done: false };
@@ -47,11 +42,10 @@ setTaskList()
 
 ///detelen
 
-
 function deleteTask() {
+    const task_id = this.id
     const data = { description: document.getElementById("task").value, done: false };
-    task_id = task.id;
-    fetch("http://localhost:3000/" + task.id, {
+    fetch("http://localhost:3000/" + task_id, {
         method: "DELETE",
         body: JSON.stringify(data),
         headers: {
@@ -60,9 +54,3 @@ function deleteTask() {
     });
     window.location.reload(false);
 };
-
-document.getElementById("task_id").addEventListener("click", deleteTask);
-
-
-
-
